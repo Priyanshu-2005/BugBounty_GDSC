@@ -4,35 +4,39 @@ let searchBtn = document.getElementById("search-btn");
 let result = document.getElementById("result");
 
 //Function to fetch data from API
-let getMovie = () => {
-  let movieName = movieNameRef;
-  let url = 'http://www.omdbapi.com/?t=${movieName}&apikey=${key}';
-  //If input field is empty
+let getMovie = async () => {
+  let movieName = movieNameRef.value;
+  console.log(movieName);
+
+  let url = `http://www.omdbapi.com/?t=${movieName}&apikey=${key}`;
   if (movieName <= 0) {
     result.innerHTML = `<h3 class="msg">Please Enter A Movie Name</h3>`;
   }
-  //If input field is NOT empty
+
   else {
-    fetch(url)
-      .then((data) => {
-        //If movie exists in database
+    await fetch(url)      
+      .then(async (response) => {
+        const data = await response.json();
+        
+        console.log(data);
+        
         if (data.Response == "True") {
           result.innerHTML = `
             <div class="info">
-                <img src={data.Poster} class="poster">
+                <img src=${data.Poster} class="poster">
                 <div>
-                    <h2>{data.Title}</h2>
+                    <h2>${data.Title}</h2>
                     <div class="rating">
                         <img src="star-icon.svg">
-                        <h4>{data.imdbRating}</h4>
+                        <h4>${data.imdbRating}</h4>
                     </div>
                     <div class="details">
-                        <span>{data.Rated}</span>
-                        <span>{data.Year}</span>
-                        <span>{data.Runtime}</span>
+                        <span>${data.Rated}</span>
+                        <span>${data.Year}</span>
+                        <span>${data.Runtime}</span>
                     </div>
                     <div class="genre">
-                        <div>{data.Genre.split(",").join("</div><div>")}</div>
+                        <div>${data.Genre.split(",").join("</div><div>")}</div>
                     </div>
                 </div>
             </div>
@@ -43,12 +47,10 @@ let getMovie = () => {
             
         `;
         }
-        //If movie does NOT exists in database
         else {
-          result.innerHTML = `<h3 class='msg'>{data.Error}</h3>`;
+          result.innerHTML = `<h3 class='msg'>${data.Error}</h3>`;
         }
       })
-      //If error occurs
       .catch(() => {
         result.innerHTML = `<h3 class="msg">Error Occured</h3>`;
       });

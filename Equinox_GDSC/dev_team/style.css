@@ -1,5 +1,5 @@
 * {
-    padding: 0;
+    padding: 10px;
     margin: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
@@ -9,14 +9,21 @@
   }
   .row {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     padding: 2em 1em;
     text-align: center;
+    justify-content:space-between;
   }
-  .column {
+  .column {  
+    margin-right: 20px;
     width: 100%;
     padding: 0.5em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    /* align-items: center; */
   }
+  
   h1 {
     width: 100%;
     text-align: center;
@@ -40,6 +47,11 @@
     border-radius: 50%;
     margin: 0 auto 2em auto;
   }
+  .card:hover{
+    background-color: #4c0bce;
+    color:#ffffff
+
+  }
   .card img {
     width: 100%;
     border-radius: 50%;
@@ -54,23 +66,67 @@
     letter-spacing: 2px;
   }
   .icons {
-    width: 50%;
     min-width: 180px;
-    margin: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
+
   }
   .card a {
     text-decoration: none;
     color: inherit;
     font-size: 1.4em;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (max-width: 300px) {
     section {
       padding: 1em 7em;
     }
+    .row{
+      width:100%;
+      flex-direction: column;
+      padding: 0%;
+
+    }
+    .column{
+      width:100%;
+      font-size: 10px;
+      padding: 0%;
+    }
+    *{
+      padding:0px;
+      /* margin: 1px; */
+    }
+    h1{
+      font-size: 15px;
+      text-align: left;
+
+    }
+    .icons {
+      min-width: 180px;
+      display: flex;
+      justify-content:space-between;
+      /* padding: 10%;
+       */
+       /* margin: 10%; */
+       flex-direction: row;
+      align-items:start ;
+  
+    }
   }
-  @media screen and (min-width: 992px) {
+  @media screen and (max-width: 1025px) {
+    section {
+      padding: 1em 7em;
+    }
+    .row{
+      width:100%;
+      flex-direction: column;
+
+    }
+    .column{
+      width:100%;
+
+    }
+  }
+  @media screen and (max-width: 992px) {
     section {
       padding: 1em;
     }
